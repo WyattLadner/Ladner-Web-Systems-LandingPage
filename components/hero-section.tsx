@@ -30,7 +30,6 @@ export function HeroSection() {
             </a>
           </Button>
         </div>
-      </div>
     </section>
   )
 }
