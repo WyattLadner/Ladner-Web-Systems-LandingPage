@@ -57,7 +57,6 @@ export function TrustSection() {
           ))}
         </div>
       </div>
-      </div>
     </section>
   )
 }
