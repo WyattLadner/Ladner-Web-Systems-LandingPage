@@ -4,6 +4,7 @@ import {
   Droplets,
   Flame,
   Wrench,
+  CircleDot,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
@@ -35,8 +36,14 @@ const services = [
   {
     title: "Fixture Installation",
     description:
-      "Professional installation of faucets, toilets, and other fixtures.",
+      "Professional installation of faucets, sinks, and other fixtures.",
     icon: Wrench,
+  },
+  {
+    title: "Toilet Repair",
+    description:
+      "Running, leaking, or clogged? We fix all toilet issues quickly and affordably.",
+    icon: CircleDot,
   },
 ]
 
