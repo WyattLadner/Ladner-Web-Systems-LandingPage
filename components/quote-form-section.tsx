@@ -39,10 +39,50 @@ export function QuoteFormSection() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [selectedService, setSelectedService] = useState("")
   const [selectedUrgency, setSelectedUrgency] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState("")
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsSubmitted(true)
+    setIsSubmitting(true)
+    setSubmitError("")
+
+    const formData = new FormData(e.currentTarget)
+
+    const payload = {
+      fullName: formData.get("name"),
+      phone: formData.get("phone"),
+      email: formData.get("email"),
+      serviceNeeded: selectedService,
+      zipCode: formData.get("zipcode"),
+      urgencyLevel: selectedUrgency,
+      problemDescription: formData.get("problem"),
+      preferredContactMethod: formData.get("contact-method"),
+    }
+
+    try {
+      const response = await fetch("http://n8n-b0kw4gogkkc4o0sswwcosk4c.34.123.144.211.sslip.io/webhook/river-city-quote", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+
+      if (response.ok) {
+        setIsSubmitted(true)
+      } else {
+        setSubmitError(
+          "Something went wrong submitting your request. Please try again or call us directly."
+        )
+      }
+    } catch (error) {
+      setSubmitError(
+        "Something went wrong submitting your request. Please try again or call us directly."
+      )
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (isSubmitted) {
@@ -59,7 +99,15 @@ export function QuoteFormSection() {
             Thank You!
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            We&apos;ve received your request and will reach out soon.
+            Thanks — we&apos;ve received your request and will reach out soon.
+            If your plumbing issue is urgent, please call us directly at{" "}
+            <a
+              href="tel:2515550148"
+              className="font-medium text-primary hover:underline"
+            >
+              (251) 555-0148
+            </a>
+            .
           </p>
         </div>
       </section>
@@ -74,7 +122,7 @@ export function QuoteFormSection() {
       <div className="mx-auto max-w-2xl">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-            Request a Free Quote
+            Request a Quote
           </h2>
           <p className="mt-4 text-muted-foreground">
             Fill out the form below and we&apos;ll get back to you as soon as
@@ -108,13 +156,17 @@ export function QuoteFormSection() {
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="email">Email Address</FieldLabel>
+                <FieldLabel htmlFor="email">
+                  Email Address{" "}
+                  <span className="font-normal text-muted-foreground">
+                    (optional)
+                  </span>
+                </FieldLabel>
                 <Input
                   id="email"
                   name="email"
                   type="email"
                   placeholder="john@example.com"
-                  required
                 />
               </Field>
 
@@ -142,7 +194,7 @@ export function QuoteFormSection() {
                 </SelectTrigger>
                 <SelectContent>
                   {services.map((service) => (
-                    <SelectItem key={service} value={service.toLowerCase()}>
+                    <SelectItem key={service} value={service}>
                       {service}
                     </SelectItem>
                   ))}
@@ -151,11 +203,15 @@ export function QuoteFormSection() {
             </Field>
 
             <Field>
-              <FieldLabel htmlFor="urgency">Urgency Level</FieldLabel>
+              <FieldLabel htmlFor="urgency">
+                Urgency Level{" "}
+                <span className="font-normal text-muted-foreground">
+                  (optional)
+                </span>
+              </FieldLabel>
               <Select
                 value={selectedUrgency}
                 onValueChange={setSelectedUrgency}
-                required
               >
                 <SelectTrigger id="urgency" className="w-full">
                   <SelectValue placeholder="How urgent is this?" />
@@ -186,7 +242,12 @@ export function QuoteFormSection() {
             </Field>
 
             <Field>
-              <Label className="mb-2">Preferred Contact Method</Label>
+              <Label className="mb-2">
+                Preferred Contact Method{" "}
+                <span className="font-normal text-muted-foreground">
+                  (optional)
+                </span>
+              </Label>
               <RadioGroup
                 defaultValue="either"
                 name="contact-method"
@@ -213,9 +274,19 @@ export function QuoteFormSection() {
               </RadioGroup>
             </Field>
 
-            <Button type="submit" size="lg" className="w-full">
-              Request My Quote
-            </Button>
+            <div className="space-y-4">
+              {submitError && (
+                <p className="text-sm font-medium text-destructive text-center">
+                  {submitError}
+                </p>
+              )}
+              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? "Submitting..." : "Request a Quote"}
+              </Button>
+              <p className="text-center text-sm text-muted-foreground">
+                We&apos;ll review your request and reach out as soon as possible.
+              </p>
+            </div>
           </FieldGroup>
         </form>
       </div>
