@@ -24,16 +24,17 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-2">
           <span className="text-lg font-bold text-primary sm:text-xl">
-            River City Plumbing Co.
+            Ladner Web Systems
           </span>
         </div>
-        <Button variant="outline" size="sm" asChild>
-          <a href="tel:+12515550148" className="flex items-center gap-2">
-            <Phone className="size-4" />
-            <span className="hidden sm:inline">(251) 555-0148</span>
-            <span className="sm:hidden">Call</span>
-          </a>
-        </Button>
+        <div className="flex items-center gap-4">
+          <Button variant="outline" size="sm" asChild>
+            <a href="#demo">Request a Demo</a>
+          </Button>
+          <Button size="sm" asChild>
+            <a href="#contact">Get in Touch</a>
+          </Button>
+        </div>
       </div>
     </header>
   )
