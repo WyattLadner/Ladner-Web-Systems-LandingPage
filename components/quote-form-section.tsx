@@ -62,16 +62,14 @@ export function QuoteFormSection() {
     try {
       console.log(values)
 
-      const response = await fetch(
-        "https://n8n-b0kw4gogkkc4o0sswwcosk4c.34.123.144.211.sslip.io/webhook/5c1f417a-8b9d-4035-87e7-fd6818feca03",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      )
+      // Changed: now posts to the local API route instead of directly to n8n
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      })
 
       if (!response.ok) throw new Error("Failed to submit form")
 
