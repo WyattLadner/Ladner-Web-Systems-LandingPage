@@ -32,17 +32,10 @@ export function Footer() {
 
           <div className="mt-6 flex flex-col items-center gap-4 sm:flex-row">
             <Button
-              variant="secondary"
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
               asChild
             >
               <a href="#contact">Get in Touch</a>
-            </Button>
-            <Button
-              variant="outline"
-              className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
-              asChild
-            >
-              <a href="#demo">Request a Demo</a>
             </Button>
           </div>
 

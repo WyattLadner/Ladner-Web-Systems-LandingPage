@@ -28,9 +28,6 @@ export function Header() {
           </span>
         </div>
         <div className="flex items-center gap-4">
-          <Button variant="outline" size="sm" asChild>
-            <a href="#demo">Request a Demo</a>
-          </Button>
           <Button size="sm" asChild>
             <a href="#contact">Get in Touch</a>
           </Button>

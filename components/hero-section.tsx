@@ -2,8 +2,9 @@ import { Button } from "@/components/ui/button"
 
 export function HeroSection() {
   return (
-    <section className="bg-background px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-      <div className="mx-auto max-w-4xl text-center">
+    <section className="relative overflow-hidden bg-background px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+      <div className="absolute top-[0%] left-[20%] -z-10 w-[600px] h-[600px] rounded-full bg-primary/20 blur-[120px] mix-blend-screen animate-orb-float" />
+      <div className="relative z-10 mx-auto max-w-4xl text-center">
         <p className="mb-3 text-sm font-medium tracking-wide text-primary">
           Built for local businesses
         </p>
@@ -13,12 +14,9 @@ export function HeroSection() {
         <p className="mx-auto mt-4 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
           Ladner Web Systems builds websites, quote request systems, and appointment-request workflows for local businesses that need a stronger online presence and a better way to handle incoming customer requests.
         </p>
-        <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <div className="mt-8 flex justify-center">
           <Button size="lg" asChild>
             <a href="#contact">Get in Touch</a>
-          </Button>
-          <Button variant="outline" size="lg" asChild>
-            <a href="#demo">Request a Demo</a>
           </Button>
         </div>
       </div>
