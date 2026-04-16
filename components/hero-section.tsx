@@ -2,9 +2,10 @@ import { Button } from "@/components/ui/button"
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-background px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-      <div className="absolute top-[0%] left-[20%] -z-10 w-[600px] h-[600px] rounded-full bg-primary/20 blur-[120px] mix-blend-screen animate-orb-float" />
-      <div className="relative z-10 mx-auto max-w-4xl text-center">
+    <section className="relative overflow-hidden bg-background px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+      {/* Primary glowing orb */}
+      <div className="absolute left-[10%] top-[5%] z-0 h-[420px] w-[420px] rounded-full bg-primary/50 blur-[110px] animate-orb-float" />
+      <div className="absolute bottom-[5%] right-[10%] z-0 h-[360px] w-[360px] rounded-full bg-primary/45 blur-[100px] animate-orb-float-reverse" /><div className="relative z-10 mx-auto max-w-4xl text-center">
         <p className="mb-3 text-sm font-medium tracking-wide text-primary">
           Built for local businesses
         </p>
